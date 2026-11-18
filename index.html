@@ -388,7 +388,7 @@
   document.querySelectorAll('[data-payment]').forEach(b=>b.addEventListener('click',()=>{if(orderSaved)return;if(b.dataset.payment==='cash'){completeOrder('cash',null);return}pendingPayment=b.dataset.payment;paymentConfirmCheck.checked=false;paymentConfirmGo.disabled=true;paymentConfirm.showModal()}));
   paymentConfirmCheck.addEventListener('change',()=>{paymentConfirmGo.disabled=isSubmittingOrder||!paymentConfirmCheck.checked});
   document.getElementById('payment-confirm-cancel').addEventListener('click',()=>{paymentConfirm.close();pendingPayment=null});
-  paymentConfirmGo.addEventListener('click',()=>{if(!paymentConfirmCheck.checked||!pendingPayment||isSubmittingOrder||orderSaved)return;const paymentWindow=window.open('about:blank','_blank');if(paymentWindow){paymentWindow.document.title='מתחברים לתשלום…';paymentWindow.document.body.textContent='ההזמנה נשמרת, עוד רגע עוברים לתשלום.';paymentWindow.opener=null}completeOrder(pendingPayment,paymentWindow)});
+  paymentConfirmGo.addEventListener('click',()=>{if(!paymentConfirmCheck.checked||!pendingPayment||isSubmittingOrder||orderSaved)return;const paymentWindow=window.open('about:blank','_blank');completeOrder(pendingPayment,paymentWindow)});
   renderCart();
 </script>
 </body>
