@@ -198,12 +198,90 @@
     .pickup-select{min-height:48px;font-weight:600}
     @media(max-width:760px){.cart-row{grid-template-columns:minmax(0,1fr) auto auto;gap:8px}.cart-row-price{grid-column:auto}.cart-remove{font-size:12px}}
     @media(max-width:390px){.cart-row{grid-template-columns:minmax(0,1fr) auto}.cart-remove{grid-column:1 / -1;justify-self:start;padding:3px 0}}
+    /* Cart drawer */
+    .cart-launch{display:inline-flex;align-items:center;gap:9px;min-height:54px;padding:10px 18px;border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(10px);transition:transform .2s,box-shadow .2s}
+    .cart-launch:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(65,40,32,.3)}
+    .cart-launch-icon{font-size:19px;line-height:1}
+    .cart-launch span{margin:0 0 0 2px}
+    .shop-overlay{z-index:100;justify-content:flex-start;padding:0;background:rgba(37,31,26,.42);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+    .shop-overlay.open{opacity:1;visibility:visible}
+    .shop-dialog{height:100%;width:min(100%,520px);max-height:none;border-radius:0 26px 26px 0;padding:30px;box-shadow:-18px 0 65px rgba(45,34,25,.2);transform:translateX(-24px);transition:transform .28s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;overflow:auto}
+    .shop-overlay.open .shop-dialog{transform:translateX(0)}
+    .shop-head{padding-bottom:18px;margin-bottom:0;border-bottom:1px solid #eee7d9}
+    .shop-kicker{font-size:12px;font-weight:700;letter-spacing:.08em;color:#697b58;margin-bottom:3px}
+    .shop-head h2{font-size:32px;line-height:1.2}
+    .shop-close{flex:none;transition:background .2s,transform .2s}
+    .shop-close:hover{background:#e8dfce;transform:rotate(8deg)}
+    .shop-note{position:relative;padding:13px 42px 13px 14px;margin:16px 0 12px;background:#f3f0e4;border:1px solid #e8e2d2}
+    .shop-note:before{content:'✦';position:absolute;right:15px;top:50%;transform:translateY(-50%);color:#758565;font-size:18px}
+    .cart-items{min-height:75px}
+    .cart-empty{padding:27px 15px;text-align:center;border:1px dashed #d9d1c1;border-radius:16px;color:#777267;line-height:1.7;background:#fffaf0}
+    .cart-empty b{display:block;color:#783344;font-family:'Alef','Assistant',sans-serif;font-size:19px}
+    .cart-row{grid-template-columns:minmax(0,1fr) auto auto;padding:16px 2px;border-bottom:1px solid #eee7d9}
+    .cart-row-title{font-family:'Alef','Assistant',sans-serif;font-size:17px;color:#3b352d}
+    .cart-row-subtitle{font-size:12px;color:#817a6d}
+    .cart-row-price{font-size:14px}
+    .qty-control{gap:9px}
+    .qty-control button{width:31px;height:31px;border:1px solid #dce2d4;background:#eef1e8;transition:background .18s,transform .18s}
+    .qty-control button:hover{background:#dfe7d6;transform:scale(1.06)}
+    .cart-total{margin-top:3px;padding:17px 2px;border-bottom:0;font-size:17px}
+    .cart-total strong{font-size:22px;color:#783344}
+    .shop-form{padding-top:17px;margin-top:0;border-top:1px solid #eee7d9;gap:13px}
+    .shop-form label{font-size:13px;color:#4b453c}
+    .shop-form input,.shop-form select{min-height:48px;border-color:#ded7c9;border-radius:12px;padding:11px 13px;transition:border .18s,box-shadow .18s}
+    .shop-form input:focus,.shop-form select:focus{outline:0;border-color:#879875;box-shadow:0 0 0 3px rgba(135,152,117,.18)}
+    .payment-heading{font-size:13px;font-weight:700;color:#4b453c;margin:0 0 8px}
+    .payment-choice{flex:1;justify-content:center;min-height:48px;border-radius:12px;transition:background .18s,border .18s}
+    .shop-primary{min-height:52px;margin-top:7px;border-radius:14px;box-shadow:0 7px 18px rgba(120,51,68,.19);transition:filter .2s,transform .2s}
+    .shop-primary:not(:disabled):hover{filter:brightness(1.07);transform:translateY(-1px)}
+    .shop-primary:disabled{box-shadow:none}
+    .shop-status{font-size:13px}
+    body.cart-open{overflow:hidden}
+    @media(max-width:760px){.shop-overlay{align-items:stretch;justify-content:stretch;padding:0}.shop-dialog{width:100%;height:100%;max-height:100dvh;border-radius:0;padding:calc(18px + env(safe-area-inset-top)) 19px calc(18px + env(safe-area-inset-bottom));transform:translateY(18px)}.shop-overlay.open .shop-dialog{transform:translateY(0)}.shop-head h2{font-size:27px}.cart-launch{right:12px;bottom:76px}}
+    @media(max-width:390px){.shop-dialog{padding-right:15px;padding-left:15px}.cart-launch{right:9px;bottom:70px}}
+    .nav{padding-left:26px;padding-right:26px}
+    .cart-nav{min-width:46px;min-height:46px;justify-content:center;padding:9px 11px;background:#fffaf0;box-shadow:0 4px 14px rgba(65,40,32,.08)}
+    .cart-nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .cart-nav span{position:absolute;top:-6px;left:-5px;min-width:21px;height:21px;border:2px solid #fffaf0;font-size:11px}
+    .nav{position:relative}
+    .cart-launch{display:none}
+    .cart-view[hidden],.checkout-view[hidden],.payment-view[hidden]{display:none}
+    .cart-view{display:flex;flex-direction:column;flex:1}
+    .cart-items{flex:1}
+    .cart-empty{margin-top:12px;padding:32px 15px}
+    .cart-row{grid-template-columns:minmax(0,1fr) auto;gap:9px 12px;padding:16px 2px}
+    .cart-row-main{grid-column:1;grid-row:1}
+    .cart-row-price{grid-column:2;grid-row:1;font-size:16px}
+    .qty-control{grid-column:1;grid-row:2;justify-self:start}
+    .cart-remove{grid-column:2;grid-row:2;justify-self:end}
+    .cart-total{margin-top:auto;padding:19px 2px 15px;border-top:1px solid #eee7d9}
+    .shop-primary{min-height:54px}
+    .checkout-back{align-self:flex-start;border:0;background:transparent;color:#657b54;padding:3px 0 9px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+    .checkout-step{margin:4px 0 17px;color:#758565;font-size:12px;font-weight:800}
+    .shop-form{padding-top:0;border-top:0;margin-top:0}
+    .shop-form label{font-size:14px}
+    .shop-form input,.shop-form select{min-height:50px}
+    .payment-view h3{margin:0 0 8px;color:#302b24;font-family:'Alef','Assistant',sans-serif;font-size:22px}
+    .payment-total{margin:0 0 14px;color:#625b4d;font-size:14px}.payment-total strong{color:#783344;font-size:20px}
+    .payment-options.payment-cards{display:grid;gap:10px}
+    .payment-card{display:grid;grid-template-columns:76px minmax(0,1fr) 20px;align-items:center;gap:12px;width:100%;min-height:76px;padding:12px 14px;border:1px solid #e4ddcf;border-radius:15px;background:#fffefa;color:#302b24;text-align:right;font:inherit;cursor:pointer;transition:border .18s,background .18s,transform .18s}
+    .payment-card:hover{border-color:#a6b295;background:#faf9f1;transform:translateY(-1px)}
+    .payment-card>span:nth-child(2){display:grid;gap:4px}.payment-card b{font-size:15px}.payment-card small{color:#777267;font-size:12px}
+    .payment-logo{display:grid;place-items:center;width:66px;height:42px;border-radius:11px;background:#f3f5fb;font-family:Arial,sans-serif;font-weight:800}
+    .bit-logo{color:#333f9e;font-size:29px;letter-spacing:-2px}
+    .paybox-logo{background:#f7efff;color:#7a42bd;font-size:16px;letter-spacing:-.8px}
+    .cash-logo{background:#edf3e8;color:#4b6845;font-size:24px}
+    .payment-arrow{color:#87927a;font-size:19px}
+    .payment-missing{margin-top:14px;padding:14px;border:1px solid #ead9b3;border-radius:13px;background:#fff7e8;color:#625b4d;font-size:13px;line-height:1.65}
+    .payment-missing .button,.shop-status .button{display:inline-flex;margin-top:11px;align-items:center;justify-content:center;min-height:42px;padding:9px 16px}
+    @media(max-width:760px){.nav{padding-left:18px;padding-right:18px}.cart-nav span{top:-4px;left:-4px}.shop-overlay{align-items:stretch;justify-content:stretch}.shop-dialog{width:100%;height:100%;max-height:100dvh;border-radius:0;padding:calc(18px + env(safe-area-inset-top)) 19px calc(18px + env(safe-area-inset-bottom));transform:translateY(18px)}.shop-overlay.open .shop-dialog{transform:translateY(0)}.cart-total{margin-top:auto}}
+    @media(max-width:390px){.nav{padding-left:13px;padding-right:13px}.cart-nav{min-width:42px;min-height:42px;padding:8px}.payment-card{grid-template-columns:66px minmax(0,1fr) 16px;gap:9px;padding:10px}.payment-logo{width:60px}}
   .how-section{padding:16px 26px;background:var(--sage-dark);color:#fffaf1}.how-inner{max-width:900px;text-align:center;margin:auto}.how-section h2{color:#fffaf1;font-size:clamp(30px,3.4vw,38px);margin:0}.how-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:12px}.how-step{display:flex;flex-direction:column;align-items:center;gap:7px}.how-icon{display:grid;place-items:center;width:30px;height:30px;border:1.5px solid currentColor;border-radius:50%;font-size:16px;font-weight:700;line-height:1}.how-step p{margin:0;color:#fffaf1;line-height:1.45;font-size:18px;font-weight:700}@media(max-width:760px){.box-includes{font-size:16px;margin-top:8px}.how-section{padding:13px 19px}.how-section h2{font-size:29px}.how-steps{gap:8px;margin-top:10px}.how-icon{width:25px;height:25px;font-size:14px}.how-step{gap:5px}.how-step p{font-size:15px;line-height:1.4}}.products-section .section-head{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.products-section .boxes-heading{display:flex;flex-direction:column;direction:rtl;align-items:flex-start;justify-content:flex-start;gap:4px;width:100%}.products-section .box-includes:before{content:"·";color:var(--wine);font-size:1.35em;font-weight:800;padding-left:8px}.products-section .section-head h2{margin:0;white-space:nowrap}.products-section .box-includes{margin:0;font-size:clamp(19px,2.1vw,23px);text-align:right;line-height:1.5}@media(max-width:760px){.products-section .section-head{display:block}.products-section .boxes-heading{gap:4px}.products-section .section-head h2{font-size:clamp(32px,8vw,39px)}.products-section .box-includes{font-size:18px;text-align:right;line-height:1.5}}</style>
 </head>
 <body data-style="soft">
 <div class="site">
   <div class="topline">נרות חמאה בעבודת יד • מלאי מוגבל</div>
-  <nav class="nav"><a class="brand" href="#top">אוֹר <span>וחמאה</span></a><div class="navlinks"><a href="#boxes">המארזים</a><a href="#about">מה מיוחד בנרות?</a><a href="#keeping">שמירה והגשה</a></div><a class="nav-cta" href="#boxes">למארזים ↓</a></nav>
+  <nav class="nav"><a class="brand" href="#top">אוֹר <span>וחמאה</span></a><div class="navlinks"><a href="#boxes">המארזים</a><a href="#about">מה מיוחד בנרות?</a><a href="#keeping">שמירה והגשה</a></div><a class="nav-cta" href="#boxes">למארזים ↓</a><button class="cart-nav" type="button" data-open-cart aria-label="פתיחת עגלת הקניות"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 1.9-1.4L22 8H6"/><circle cx="10" cy="20" r="1.25"/><circle cx="18" cy="20" r="1.25"/></svg><span data-cart-count>0</span></button></nav>
   <header class="brand-lockup"><div class="brand-mark" aria-hidden="true">✦</div><p class="brand-name">אוֹר וחמאה</p><p class="brand-tagline">נרות חמאה אכילים</p><div class="pickup-banner"><span>⌖</span> איסוף מבית חשמונאי</div></header>
   <main id="top">
     <section class="hero">
@@ -212,31 +290,56 @@
     </section>
     <section class="section how-section" id="how"><div class="section-inner how-inner"><h2>איך זה עובד?</h2><div class="how-steps"><div class="how-step"><span class="how-icon" aria-hidden="true">1</span><p>מדליקים את נר החמאה</p></div><div class="how-step"><span class="how-icon" aria-hidden="true">2</span><p>מחכים קצת שהחמאה תימס</p></div><div class="how-step"><span class="how-icon" aria-hidden="true">3</span><p>טובלים סכין ומורחים על הלחם</p></div></div></div></section>
     <section class="section products-section" id="boxes"><div class="section-inner"><div class="section-head"><div class="boxes-heading"><h2>בחרו מארז</h2><p class="box-includes">כל מארז כולל נרות חמאה, מגש עץ וכפיות</p></div></div><div class="product-grid">
-      <article class="product-card"><div class="product-image photo-ready photo-two"><span class="image-tag">מארז זוג נרות חמאה</span><img class="product-photo" src="two-candles-photo.png" alt="מארז שני נרות חמאה עם לחם כפרי לטבילה"><svg viewBox="0 0 420 270" role="img" aria-label="שני נרות חמאה עם עשבי תיבול"><ellipse cx="210" cy="239" rx="140" ry="14" fill="#755c37" opacity=".13"/><path d="M83 209h254l-14 22H97z" fill="#c8ad77"/><path d="M91 205h238v13H91z" fill="#f6e8c2" stroke="#c7b27f"/><g transform="translate(126 0)"><rect y="90" width="61" height="115" rx="13" fill="#efd17a"/><ellipse cx="30.5" cy="95" rx="30.5" ry="11" fill="#fff0b6"/><path d="M31 88c-9-14 6-23 0-35 16 13 16 24 0 35" fill="#9c3e36"/><g fill="#78865d"><ellipse cx="14" cy="143" rx="11" ry="4" transform="rotate(-25 14 143)"/><ellipse cx="45" cy="171" rx="11" ry="4" transform="rotate(24 45 171)"/></g><path d="M14 149l38 37M48 174l-29 29" stroke="#6c7956" stroke-width="2"/></g><g transform="translate(222 0)"><rect y="72" width="65" height="133" rx="13" fill="#f5d97e"/><ellipse cx="32.5" cy="77" rx="32.5" ry="11" fill="#fff1b9"/><path d="M33 70c-9-14 7-24 0-36 17 14 18 25 0 36" fill="#8c3340"/><g fill="#78865d"><ellipse cx="15" cy="130" rx="11" ry="4" transform="rotate(-25 15 130)"/><ellipse cx="48" cy="164" rx="11" ry="4" transform="rotate(24 48 164)"/></g><path d="M14 136l40 39M51 167l-30 35" stroke="#6c7956" stroke-width="2"/></g></svg></div><div class="product-details"><div class="product-titleline"><h3>מארז זוג נרות חמאה</h3><div class="price">₪120</div></div><div class="product-flavors"><b>הטעמים במארז</b><span>חמאת עשבי תיבול ושום</span><br><span>חמאת דבש וצ׳ילי</span></div><div class="product-bottom"><span class="small-note">2 נרות חמאה בעבודת יד<br>150 גרם בכל כלי · סה״כ 300 גרם</span><button class="button small order-link" data-product="pair">להזמנה</button></div></div></article>
-      <article class="product-card"><div class="product-image photo-ready"><span class="image-tag">מארז שלישיית נרות חמאה</span><img class="product-photo" src="three-candles-photo.png?v=bfbb33f" alt="מארז שלושה נרות חמאה עם לחם כפרי לטבילה"><svg viewBox="0 0 420 270" role="img" aria-label="שלושה נרות חמאה עם עשבי תיבול"><ellipse cx="210" cy="239" rx="150" ry="14" fill="#755c37" opacity=".13"/><path d="M66 209h288l-14 22H80z" fill="#c8ad77"/><path d="M75 205h270v13H75z" fill="#f6e8c2" stroke="#c7b27f"/><g transform="translate(94 0)"><rect y="107" width="54" height="98" rx="12" fill="#efd17a"/><ellipse cx="27" cy="111" rx="27" ry="10" fill="#fff0b6"/><path d="M27 105c-8-12 5-20 0-30 14 11 14 20 0 30" fill="#9c3e36"/><g fill="#78865d"><ellipse cx="13" cy="152" rx="10" ry="4" transform="rotate(-25 13 152)"/><ellipse cx="40" cy="177" rx="10" ry="4" transform="rotate(24 40 177)"/></g></g><g transform="translate(179 0)"><rect y="76" width="58" height="129" rx="12" fill="#f5d97e"/><ellipse cx="29" cy="81" rx="29" ry="10" fill="#fff1b9"/><path d="M29 74c-8-14 6-22 0-33 15 13 16 22 0 33" fill="#8c3340"/><g fill="#78865d"><ellipse cx="13" cy="134" rx="10" cy="4" transform="rotate(-25 13 134)"/><ellipse cx="43" cy="168" rx="10" cy="4" transform="rotate(24 43 168)"/></g></g><g transform="translate(269 0)"><rect y="96" width="54" height="109" rx="12" fill="#edcf70"/><ellipse cx="27" cy="101" rx="27" ry="10" fill="#fff0b6"/><path d="M27 95c-8-13 6-21 0-31 15 12 15 21 0 31" fill="#9c3e36"/><g fill="#78865d"><ellipse cx="12" cy="144" rx="10" cy="4" transform="rotate(-25 12 144)"/><ellipse cx="40" cy="173" rx="10" cy="4" transform="rotate(24 40 173)"/></g></g></svg></div><div class="product-details"><div class="product-titleline"><h3>מארז שלישיית נרות חמאה</h3><div class="price">₪150</div></div><div class="product-flavors"><b>הטעמים במארז</b><span>חמאת עשבי תיבול ושום</span><br><span>חמאת דבש וצ׳ילי</span><br><span>חמאת טימין ותפוז</span></div><div class="product-bottom"><span class="small-note">3 נרות חמאה בעבודת יד<br>150 גרם בכל כלי · סה״כ 450 גרם</span><button class="button small order-link" data-product="trio">להזמנה</button></div></div></article>
+      <article class="product-card"><div class="product-image photo-ready photo-two"><span class="image-tag">מארז זוג נרות חמאה</span><img class="product-photo" src="two-candles-photo.png" alt="מארז שני נרות חמאה עם לחם כפרי לטבילה"><svg viewBox="0 0 420 270" role="img" aria-label="שני נרות חמאה עם עשבי תיבול"><ellipse cx="210" cy="239" rx="140" ry="14" fill="#755c37" opacity=".13"/><path d="M83 209h254l-14 22H97z" fill="#c8ad77"/><path d="M91 205h238v13H91z" fill="#f6e8c2" stroke="#c7b27f"/><g transform="translate(126 0)"><rect y="90" width="61" height="115" rx="13" fill="#efd17a"/><ellipse cx="30.5" cy="95" rx="30.5" ry="11" fill="#fff0b6"/><path d="M31 88c-9-14 6-23 0-35 16 13 16 24 0 35" fill="#9c3e36"/><g fill="#78865d"><ellipse cx="14" cy="143" rx="11" ry="4" transform="rotate(-25 14 143)"/><ellipse cx="45" cy="171" rx="11" ry="4" transform="rotate(24 45 171)"/></g><path d="M14 149l38 37M48 174l-29 29" stroke="#6c7956" stroke-width="2"/></g><g transform="translate(222 0)"><rect y="72" width="65" height="133" rx="13" fill="#f5d97e"/><ellipse cx="32.5" cy="77" rx="32.5" ry="11" fill="#fff1b9"/><path d="M33 70c-9-14 7-24 0-36 17 14 18 25 0 36" fill="#8c3340"/><g fill="#78865d"><ellipse cx="15" cy="130" rx="11" ry="4" transform="rotate(-25 15 130)"/><ellipse cx="48" cy="164" rx="11" ry="4" transform="rotate(24 48 164)"/></g><path d="M14 136l40 39M51 167l-30 35" stroke="#6c7956" stroke-width="2"/></g></svg></div><div class="product-details"><div class="product-titleline"><h3>מארז זוג נרות חמאה</h3><div class="price">₪120</div></div><div class="product-flavors"><b>הטעמים במארז</b><span>חמאת עשבי תיבול ושום</span><br><span>חמאת דבש וצ׳ילי</span></div><div class="product-bottom"><span class="small-note">2 נרות חמאה בעבודת יד<br>150 גרם בכל כלי · סה״כ 300 גרם</span><button class="button small order-link" data-product="pair">הוספה לסל</button></div></div></article>
+      <article class="product-card"><div class="product-image photo-ready"><span class="image-tag">מארז שלישיית נרות חמאה</span><img class="product-photo" src="three-candles-photo.png?v=bfbb33f" alt="מארז שלושה נרות חמאה עם לחם כפרי לטבילה"><svg viewBox="0 0 420 270" role="img" aria-label="שלושה נרות חמאה עם עשבי תיבול"><ellipse cx="210" cy="239" rx="150" ry="14" fill="#755c37" opacity=".13"/><path d="M66 209h288l-14 22H80z" fill="#c8ad77"/><path d="M75 205h270v13H75z" fill="#f6e8c2" stroke="#c7b27f"/><g transform="translate(94 0)"><rect y="107" width="54" height="98" rx="12" fill="#efd17a"/><ellipse cx="27" cy="111" rx="27" ry="10" fill="#fff0b6"/><path d="M27 105c-8-12 5-20 0-30 14 11 14 20 0 30" fill="#9c3e36"/><g fill="#78865d"><ellipse cx="13" cy="152" rx="10" ry="4" transform="rotate(-25 13 152)"/><ellipse cx="40" cy="177" rx="10" ry="4" transform="rotate(24 40 177)"/></g></g><g transform="translate(179 0)"><rect y="76" width="58" height="129" rx="12" fill="#f5d97e"/><ellipse cx="29" cy="81" rx="29" ry="10" fill="#fff1b9"/><path d="M29 74c-8-14 6-22 0-33 15 13 16 22 0 33" fill="#8c3340"/><g fill="#78865d"><ellipse cx="13" cy="134" rx="10" cy="4" transform="rotate(-25 13 134)"/><ellipse cx="43" cy="168" rx="10" cy="4" transform="rotate(24 43 168)"/></g></g><g transform="translate(269 0)"><rect y="96" width="54" height="109" rx="12" fill="#edcf70"/><ellipse cx="27" cy="101" rx="27" ry="10" fill="#fff0b6"/><path d="M27 95c-8-13 6-21 0-31 15 12 15 21 0 31" fill="#9c3e36"/><g fill="#78865d"><ellipse cx="12" cy="144" rx="10" cy="4" transform="rotate(-25 12 144)"/><ellipse cx="40" cy="173" rx="10" cy="4" transform="rotate(24 40 173)"/></g></g></svg></div><div class="product-details"><div class="product-titleline"><h3>מארז שלישיית נרות חמאה</h3><div class="price">₪150</div></div><div class="product-flavors"><b>הטעמים במארז</b><span>חמאת עשבי תיבול ושום</span><br><span>חמאת דבש וצ׳ילי</span><br><span>חמאת טימין ותפוז</span></div><div class="product-bottom"><span class="small-note">3 נרות חמאה בעבודת יד<br>150 גרם בכל כלי · סה״כ 450 גרם</span><button class="button small order-link" data-product="trio">הוספה לסל</button></div></div></article>
     </div><div class="boxes-contact-wrap"><a class="brand-contact boxes-contact" href="https://wa.me/972523300080" target="_blank" rel="noopener" aria-label="לפרטים נוספים בוואטסאפ"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.02 3C8.86 3 3.04 8.78 3.04 15.9c0 2.28.6 4.5 1.74 6.46L3 29l6.84-1.78a13.1 13.1 0 0 0 6.18 1.57h.01c7.15 0 12.97-5.79 12.97-12.9 0-3.45-1.35-6.69-3.81-9.13A12.9 12.9 0 0 0 16.02 3Zm0 23.6h-.01c-1.9 0-3.76-.51-5.38-1.48l-.39-.23-4.06 1.06 1.08-3.95-.25-.4a10.68 10.68 0 0 1-1.64-5.7c0-5.88 4.8-10.66 10.67-10.66 2.84 0 5.52 1.1 7.53 3.12a10.57 10.57 0 0 1 3.12 7.54c0 5.88-4.8 10.66-10.67 10.66Zm5.86-7.98c-.32-.16-1.9-.93-2.2-1.04-.3-.1-.52-.16-.74.16-.22.32-.84 1.04-1.03 1.26-.19.21-.38.24-.7.08-.32-.16-1.35-.5-2.58-1.6-.95-.84-1.6-1.88-1.79-2.2-.18-.32-.02-.49.14-.65.14-.14.32-.37.48-.55.16-.19.22-.32.32-.53.11-.22.06-.4-.02-.56-.08-.16-.73-1.75-1-2.4-.26-.62-.53-.53-.73-.54l-.62-.01c-.22 0-.57.08-.87.4-.3.32-1.14 1.1-1.14 2.68s1.17 3.1 1.33 3.31c.16.22 2.3 3.5 5.57 4.9.78.34 1.39.55 1.86.7.78.25 1.48.22 2.03.13.62-.09 1.9-.78 2.17-1.53.27-.75.27-1.4.19-1.53-.08-.14-.3-.22-.62-.38Z"/></svg><span>לפרטים נוספים</span><span>052-330-0080</span></a></div></div></section>
 
     <section class="section details-section" id="about"><div class="section-inner"><div class="section-head"><div><div class="eyebrow">נרות חמאה, קצת אחרת</div><h2>כל מה שכדאי לדעת</h2></div><p class="section-intro">כל מה שכדאי לדעת לפני שמגישים לשולחן או מביאים במתנה.</p></div><div class="details-grid"><article class="detail"><div class="detail-icon">✳</div><h3>עבודת יד</h3><p>כל נר וכל מארז מוכנים בעבודת יד, עם תשומת לב לפרטים ולשילובי הטעמים.</p></article><article class="detail"><div class="detail-icon">✦</div><h3>חמאה אמיתית</h3><p>100% חמאה מתובלת בתבלינים ובעשבי תיבול טריים, עם שילובי טעמים שנרקחו במיוחד.</p></article><article class="detail" id="keeping"><div class="detail-icon">❄</div><h3>שומרים בקירור</h3></article><article class="detail"><div class="detail-icon">♨</div><h3>פתיל טבעי ואכיל</h3><p>הפתיל עשוי מחומרים טבעיים וידידותיים למאכל.</p></article></div></div></section>
   </main><footer class="footer">אוֹר וחמאה · נרות חמאה בעבודת יד · איסוף מבית חשמונאי · מלאי מוגבל</footer>
 </div>
-<div class="toast" id="toast" role="status"></div>
+<div class="shop-overlay" id="cart-overlay" aria-hidden="true">
+  <section class="shop-dialog" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+    <header class="shop-head"><div><div class="shop-kicker">אוֹר וחמאה · הזמנה</div><h2 id="cart-title">סל הקניות</h2></div><button class="shop-close" type="button" aria-label="סגירת הסל" data-close-cart>×</button></header>
+    <div class="shop-note">איסוף עצמי מבית חשמונאי · כל מארז מוכן בעבודת יד ובאהבה</div>
+    <div class="cart-view" id="cart-view"><div class="cart-items" id="cart-items" aria-live="polite"></div><div class="cart-total"><span>סה״כ לתשלום</span><strong id="cart-total">₪0</strong></div><button class="shop-primary" type="button" id="checkout-start" disabled>לתשלום</button></div>
+    <form class="shop-form checkout-view" id="order-form" hidden>
+      <button class="checkout-back" type="button" id="back-to-cart">→ חזרה לסל</button><div class="checkout-step">שלב 1 מתוך 2 · פרטים ואיסוף</div>
+      <div class="form-grid"><label>שם פרטי<input name="firstName" autocomplete="given-name" required placeholder="שם פרטי"></label><label>שם משפחה<input name="lastName" autocomplete="family-name" required placeholder="שם משפחה"></label></div>
+      <label>מספר טלפון<input name="phone" type="tel" autocomplete="tel" required inputmode="tel" placeholder="050-000-0000"></label>
+      <label>מועד איסוף<select name="pickup" class="pickup-select" required><option value="" selected disabled>בחירת יום ושעה</option><option value="2026-12-03 18:00-21:00">יום חמישי, 3 בדצמבר · 18:00–21:00</option><option value="2026-12-04 09:00-13:00">יום שישי, 4 בדצמבר · 09:00–13:00</option><option value="2026-12-08 09:00-21:00">יום שלישי, 8 בדצמבר · 09:00–21:00</option><option value="2026-12-10 09:00-21:00">יום חמישי, 10 בדצמבר · 09:00–21:00</option></select></label>
+      <label>הערה להזמנה <input name="note" placeholder="משהו שחשוב שנדע? (לא חובה)"></label>
+      <button class="shop-primary" type="submit">לבחירת אמצעי תשלום</button>
+    </form>
+    <section class="payment-view" id="payment-view" hidden><button class="checkout-back" type="button" id="back-to-details">→ חזרה לפרטים</button><div class="checkout-step">שלב 2 מתוך 2 · תשלום</div><h3>איך נוח לך לשלם?</h3><p class="payment-total">סה״כ לתשלום: <strong id="payment-total">₪0</strong></p><div class="payment-options payment-cards">
+      <button class="payment-card" type="button" data-payment="bit"><span class="payment-logo bit-logo" aria-label="bit">bit</span><span><b>תשלום ב־Bit</b><small>מעבר לתשלום באפליקציה</small></span><span class="payment-arrow">←</span></button>
+      <button class="payment-card" type="button" data-payment="paybox"><span class="payment-logo paybox-logo" aria-label="PayBox">PayBox</span><span><b>תשלום ב־PayBox</b><small>מעבר לתשלום באפליקציה</small></span><span class="payment-arrow">←</span></button>
+      <button class="payment-card" type="button" data-payment="cash"><span class="payment-logo cash-logo" aria-hidden="true">₪</span><span><b>מזומן באיסוף</b><small>תשלום בעת קבלת ההזמנה</small></span><span class="payment-arrow">←</span></button>
+    </div><div id="payment-status" aria-live="polite"></div></section>
+  </section>
+</div>
 <script>
-  const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScgcWdrdKJJEvAqbY54CosYhxzrKEAACqVj2FXlIWDhQzRchg/viewform?usp=publish-editor';
-  const toast = document.getElementById('toast');
-  let toastTimer;
-  document.querySelectorAll('.order-link').forEach(button => button.addEventListener('click', () => {
-    if (GOOGLE_FORM_URL) {
-      window.open(GOOGLE_FORM_URL, '_blank', 'noopener,noreferrer');
-      return;
-    }
-    toast.textContent = 'קישור לטופס ההזמנה יתווסף כאן כשתשלחי לי את קישור Google Forms.';
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 3600);
-  }));
+  const PRODUCTS={pair:{name:'מארז זוג נרות חמאה',subtitle:'2 נרות · 300 גרם',price:120},trio:{name:'מארז שלישיית נרות חמאה',subtitle:'3 נרות · 450 גרם',price:150}};
+  const PAYMENT_LINKS={bit:'https://www.bitpay.co.il/app/share-info?i=NJSMPhgY&j=true',paybox:'https://links.payboxapp.com/kkfkGeela8b'};
+  const cart={}; const overlay=document.getElementById('cart-overlay'); const itemsNode=document.getElementById('cart-items'); const totalNode=document.getElementById('cart-total'); const checkoutStart=document.getElementById('checkout-start'); const cartView=document.getElementById('cart-view'); const form=document.getElementById('order-form'); const paymentView=document.getElementById('payment-view'); let orderDetails=null;
+  const price=n=>'₪'+n;
+  function entries(){return Object.entries(cart).filter(([,q])=>q>0)}
+  function total(){return entries().reduce((sum,[id,q])=>sum+PRODUCTS[id].price*q,0)}
+  function renderCart(){const rows=entries();const count=rows.reduce((sum,[,q])=>sum+q,0);document.querySelectorAll('[data-cart-count]').forEach(el=>el.textContent=count);totalNode.textContent=price(total());document.getElementById('payment-total').textContent=price(total());if(!rows.length){itemsNode.innerHTML='<div class="cart-empty"><b>הסל עוד מחכה למשהו טעים</b>בחרו מארז והוסיפו אותו לכאן</div>';checkoutStart.disabled=true;checkoutStart.textContent='הסל ריק';return}itemsNode.innerHTML=rows.map(([id,q])=>{const p=PRODUCTS[id];return '<article class="cart-row"><div class="cart-row-main"><span class="cart-row-title">'+p.name+'</span><span class="cart-row-subtitle">'+p.subtitle+'</span></div><strong class="cart-row-price">'+price(p.price*q)+'</strong><div class="qty-control"><button type="button" data-qty="-1" data-id="'+id+'" aria-label="הפחתה">−</button><b>'+q+'</b><button type="button" data-qty="1" data-id="'+id+'" aria-label="הוספה">+</button></div><button type="button" class="cart-remove" data-remove="'+id+'">הסרה</button></article>'}).join('');checkoutStart.disabled=false;checkoutStart.textContent='לתשלום · '+price(total())}
+  function openCart(){overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.classList.add('cart-open');overlay.querySelector('[data-close-cart]').focus()}
+  function closeCart(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');document.body.classList.remove('cart-open')}
+  function showStep(step){cartView.hidden=step!=='cart';form.hidden=step!=='details';paymentView.hidden=step!=='payment';document.getElementById('cart-title').textContent=step==='cart'?'סל הקניות':step==='details'?'פרטי הזמנה':'בחירת תשלום'}
+  document.querySelectorAll('[data-open-cart]').forEach(b=>b.addEventListener('click',()=>{showStep('cart');openCart()}));overlay.querySelector('[data-close-cart]').addEventListener('click',closeCart);overlay.addEventListener('click',e=>{if(e.target===overlay)closeCart()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('open'))closeCart()});
+  document.querySelectorAll('.order-link').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.product;cart[id]=(cart[id]||0)+1;renderCart();showStep('cart');openCart()}));
+  itemsNode.addEventListener('click',e=>{const q=e.target.closest('[data-qty]');const r=e.target.closest('[data-remove]');if(q){const id=q.dataset.id;cart[id]=Math.max(0,(cart[id]||0)+Number(q.dataset.qty))}if(r)cart[r.dataset.remove]=0;renderCart()});
+  checkoutStart.addEventListener('click',()=>{if(entries().length)showStep('details')});document.getElementById('back-to-cart').addEventListener('click',()=>showStep('cart'));document.getElementById('back-to-details').addEventListener('click',()=>showStep('details'));
+  form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;orderDetails=Object.fromEntries(new FormData(form));showStep('payment')});
+  document.querySelectorAll('[data-payment]').forEach(b=>b.addEventListener('click',()=>{const method=b.dataset.payment;const status=document.getElementById('payment-status');if(method==='cash'){const message=buildMessage('מזומן באיסוף');status.innerHTML='<div class="shop-status">ההזמנה מוכנה לאישור. שלחו את הפרטים ונחזור אליכם לאישור מועד האיסוף.<br><a class="button" target="_blank" rel="noopener" href="https://wa.me/972523300080?text='+encodeURIComponent(message)+'">אישור הזמנה בוואטסאפ</a></div>';return}const link=PAYMENT_LINKS[method];if(link){window.open(link,'_blank','noopener,noreferrer');status.innerHTML='<div class="shop-status">נפתח קישור התשלום. לתשומת לבכם, יש לשלם '+price(total())+' ולשלוח את ההזמנה בוואטסאפ כדי לתאם איסוף.<br><a class="button" target="_blank" rel="noopener" href="https://wa.me/972523300080?text='+encodeURIComponent(buildMessage(method==='bit'?'Bit':'PayBox'))+'">שליחת פרטי ההזמנה</a></div>'}else status.innerHTML='<div class="payment-missing">קישור התשלום עדיין לא הוגדר. אפשר לשלוח את פרטי ההזמנה בוואטסאפ ונחזור עם קישור לתשלום.<br><a class="button" target="_blank" rel="noopener" href="https://wa.me/972523300080?text='+encodeURIComponent(buildMessage(method==='bit'?'Bit':'PayBox'))+'">בקשת קישור ותיאום בוואטסאפ</a></div>'}));
+  function buildMessage(payment){const summary=entries().map(([id,q])=>PRODUCTS[id].name+' × '+q).join('\n');return 'שלום, אשמח להזמין מאוֹר וחמאה:\n'+summary+'\nסה״כ: '+price(total())+'\nשם: '+orderDetails.firstName+' '+orderDetails.lastName+'\nטלפון: '+orderDetails.phone+'\nמועד איסוף: '+orderDetails.pickup+'\nתשלום: '+payment+(orderDetails.note?'\nהערה: '+orderDetails.note:'')}
+  renderCart();
 </script>
 </body>
 </html>
+
 
 
 
